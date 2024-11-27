@@ -10,7 +10,7 @@ import SwiftUI
 struct AugmentedAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartView()
         }
     }
 }

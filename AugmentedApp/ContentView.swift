@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        MainARViewContainer()  // Wijzig de naam van ARViewContainer naar MainARViewContainer
+        MainARViewContainer()  // De AR-view wordt hier getoond
             .edgesIgnoringSafeArea(.all)
     }
 }
@@ -21,7 +21,4 @@ struct MainARViewContainer: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
         // Hier kun je logica toevoegen om de ViewController bij te werken, als dat nodig is
     }
-}
-#Preview {
-    
 }

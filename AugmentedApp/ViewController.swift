@@ -64,7 +64,7 @@ class ViewController: UIViewController {
             arView.scene.removeAnchor(existingAnchor)
         }
         
-        // Create a 3D text entity
+        // Maak een 3D tekst entiteit
         let textMesh = MeshResource.generateText(label,
                                                  extrusionDepth: 0.05,
                                                  font: .systemFont(ofSize: 0.2),
@@ -74,19 +74,36 @@ class ViewController: UIViewController {
         
         let textMaterial = SimpleMaterial(color: .red, isMetallic: true)
         let textEntity = ModelEntity(mesh: textMesh, materials: [textMaterial])
-        textEntity.position = [0, 0, -0.5] // Place 50 cm in front of the camera
+        textEntity.scale = [0.1, 0.1, 0.1] // Start kleiner
         
-        // Add the text entity to the AR scene
+        // Voeg het tekstobject toe aan een AR-anker
         let anchor = AnchorEntity(world: [0, 0, -0.5])
         anchor.addChild(textEntity)
         arView.scene.addAnchor(anchor)
         
         // Bewaar het nieuwe anker als het huidige anker
         currentAnchor = anchor
+        
+        // Maak de animatie vloeiender en beweeg de tekst langzaam in het zicht
+        let initialPosition = SIMD3<Float>(0, 0, -0.8)  // Begin iets verder van de camera af
+        let finalPosition = SIMD3<Float>(0, 0, -1.5)   // Eindpositie dichterbij
+
+        // Voeg een animatie toe
+        let animationDuration: TimeInterval = 1.0
+        var transform = textEntity.transform
+        transform.translation = initialPosition  // Start de animatie buiten het zicht
+
+        // Zet de tekst langzaam naar de eindpositie
+        textEntity.move(to: Transform(translation: finalPosition), relativeTo: nil, duration: animationDuration)
+        
+        // Animatie is klaar, dan de uiteindelijke transform
+        DispatchQueue.main.asyncAfter(deadline: .now() + animationDuration) {
+            print("Animatie voltooid")
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Process camera frame for Vision
+        // Verwerk de camera frame voor Vision
         guard let currentFrame = arView.session.currentFrame else { return }
         let pixelBuffer = currentFrame.capturedImage
         
@@ -100,3 +117,4 @@ class ViewController: UIViewController {
         }
     }
 }
+
