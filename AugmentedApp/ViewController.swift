@@ -10,6 +10,9 @@ class ViewController: UIViewController {
     private var visionRequests = [VNRequest]()
     private let dispatchQueue = DispatchQueue(label: "com.arobjectrecognition.queue")
     
+    // Huidig AR-anchor
+    private var currentAnchor: AnchorEntity?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +59,11 @@ class ViewController: UIViewController {
     }
     
     func addARContent(label: String) {
+        // Verwijder het vorige anker indien aanwezig
+        if let existingAnchor = currentAnchor {
+            arView.scene.removeAnchor(existingAnchor)
+        }
+        
         // Create a 3D text entity
         let textMesh = MeshResource.generateText(label,
                                                  extrusionDepth: 0.05,
@@ -72,6 +80,9 @@ class ViewController: UIViewController {
         let anchor = AnchorEntity(world: [0, 0, -0.5])
         anchor.addChild(textEntity)
         arView.scene.addAnchor(anchor)
+        
+        // Bewaar het nieuwe anker als het huidige anker
+        currentAnchor = anchor
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
