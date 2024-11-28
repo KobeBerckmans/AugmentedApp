@@ -60,19 +60,47 @@ Point your camera at objects to recognize them.
 The app uses Vision and CoreML to detect objects and display their names in AR.
 Photo Library:
 
-Tap "Open Photo Library" on the start screen.
-Select an image from your library.
-The app processes the image and displays the name of the detected object.
-Technologies Used
+
+## Technlogies used
 Swift: Primary programming language
 ARKit: For creating AR experiences
 Vision: For image recognition
 CoreML: Using the MobileNetV2 model for object detection
 SwiftUI: For the start screen interface
-Known Issues
+## Known Issues
 AR object detection accuracy depends on lighting and object clarity.
 Photo Library recognition may not work well with cluttered images or unsupported objects.
-Future Improvements
+## Future Improvements
+
 Add support for custom CoreML models.
 Enhance AR animations for better user feedback.
 Allow saving recognized objects to a database.
+
+## How it works 
+AR Object Recognition:
+
+Tap "Open Camera" on the start screen to launch the AR experience.
+Point your device's camera at objects in the environment.
+The app uses ARKit to track objects and CoreML to recognize them.
+Recognized objects are displayed in the AR view as 3D text labels showing their names.
+Photo Library Object Detection:
+
+Tap "Open Photo Library" on the start screen to select a photo.
+The app processes the photo using CoreML and Vision to detect objects.
+Once the object is recognized, the name of the detected object is displayed on the screen.
+
+## Technologies Used
+Swift: The primary programming language for the app.
+ARKit: To create immersive AR experiences and handle AR camera input.
+CoreML: Used for object detection via a trained model.
+Vision: Used for processing and analyzing images for object recognition.
+RealityKit: Provides the framework for creating and animating 3D content in AR.
+UIKit: Used to build the app's interface.
+
+## Custom Models
+This app uses the MobileNetV2 model for object detection. You can replace this model with another custom model if needed. The app processes both real-time camera input and selected images from the user's library using this model.
+
+## Troubleshooting
+AR functionality not working on Simulator: ARKit only works on physical devices. Please test on a real iPhone or iPad.
+Photo Library Access: Ensure that the app has permission to access the photo library in Info.plist and check device privacy settings.
+Object Recognition not accurate: If the model does not recognize certain objects well, consider training a custom CoreML model for your use case.
