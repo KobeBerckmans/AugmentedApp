@@ -104,3 +104,10 @@ This app uses the MobileNetV2 model for object detection. You can replace this m
 AR functionality not working on Simulator: ARKit only works on physical devices. Please test on a real iPhone or iPad.
 Photo Library Access: Ensure that the app has permission to access the photo library in Info.plist and check device privacy settings.
 Object Recognition not accurate: If the model does not recognize certain objects well, consider training a custom CoreML model for your use case.
+
+## Bronnen
+
+Tutorial AR-App: https://www.youtube.com/watch?v=jjCsI56XavI
+Apple ARKit: https://developer.apple.com/documentation/arkit
+AR implementing: https://www.youtube.com/watch?v=jjCsI56XavI
+Core ML Models: https://developer.apple.com/machine-learning/models/
